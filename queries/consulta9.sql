@@ -13,7 +13,7 @@ WHERE
     FROM 
       employee e
       JOIN customer ON employee_id = support_rep_id
-      INNER JOIN invoice i1 USING(customer_id)
+      JOIN invoice i1 USING(customer_id)
     WHERE 
       i1.invoice_date::text LIKE '%2024%' AND
       e1.employee_id = e.employee_id
@@ -24,7 +24,7 @@ WHERE
     FROM 
       employee e
       JOIN customer ON employee_id = support_rep_id
-      INNER JOIN invoice i1 USING(customer_id)
+      JOIN invoice i1 USING(customer_id)
     WHERE 
       i1.invoice_date::text LIKE '%2024%'
     GROUP BY
