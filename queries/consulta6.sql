@@ -7,7 +7,7 @@ SELECT
   COUNT(i.invoice_id) AS number_of_purchases
 FROM
   invoice i 
-  INNER JOIN customer c USING(customer_id)
+  JOIN customer c USING(customer_id)
   JOIN employee e ON e.employee_id = c.support_rep_id
 WHERE
   e.first_name = 'Steve' and e.last_name = 'Johnson'
