@@ -1,6 +1,5 @@
 SELECT 
   al.title, 
-  al.album_id, 
   COUNT(DISTINCT i.invoice_id) AS "number_of_purchases"
 FROM 
   album al
