@@ -8,4 +8,4 @@ FROM
 GROUP BY 
   a.artist_id
 HAVING 
-  COUNT(DISTINCT g.genre_id) = 1
+  COUNT(DISTINCT g.genre_id) = 1;
