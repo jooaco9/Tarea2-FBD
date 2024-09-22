@@ -1,7 +1,7 @@
 -- Devolver el nombre del g´enero musical con m´as cantidad de playlists.
 -- Esquema del resultado: name. 
 
-SELECT g.name AS genre_name
+SELECT g.name 
 FROM genre g
 JOIN track t ON g.genre_id = t.genre_id
 JOIN playlist_track pt ON t.track_id = pt.track_id
