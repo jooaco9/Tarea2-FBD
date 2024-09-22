@@ -1,11 +1,11 @@
-SELECT DISTINCT 
-  a.name 
+SELECT 
+  a.name
 FROM 
   artist a 
-  NATURAL JOIN album al 
+  JOIN album al USING(artist_id)
   JOIN track t USING(album_id) 
   JOIN genre g USING(genre_id) 
 GROUP BY 
-  a.name 
+  a.artist_id
 HAVING 
-  COUNT(g.name) = 1;
+  COUNT(DISTINCT g.genre_id) = 1
