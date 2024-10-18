@@ -12,6 +12,4 @@ FROM
 WHERE
   e.first_name = 'Steve' and e.last_name = 'Johnson'
 GROUP BY
-  c.customer_id, c.first_name, c.last_name
-ORDER BY
-  c.first_name, c.last_name;
+  c.customer_id, c.first_name, c.last_name;
