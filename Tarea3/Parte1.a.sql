@@ -39,8 +39,12 @@ HAVING COUNT(DISTINCT pl.id_lugarfallec) > 1;
 -- Da una tupla
 
 -- Parte 1.b.iii
-select pl.id_pers
-from paises_lideres pl 
-GROUP BY pl.id_pers
-HAVING COUNT(DISTINCT pl.n_pers || ' ' || pl.fecha_nac || ' ' || pl.fecha_fallec) > 1;
+SELECT 
+  pl.id_pers
+FROM 
+  paises_lideres pl 
+GROUP BY 
+  pl.id_pers
+HAVING 
+  COUNT(DISTINCT pl.n_pers || ' ' || pl.fecha_nac || ' ' || pl.fecha_fallec) > 1;
 -- Da 17 tuplas
