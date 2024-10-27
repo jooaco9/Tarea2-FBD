@@ -30,7 +30,7 @@ HAVING
     COUNT(DISTINCT Y) > 1;
 
 -- 1. b. i) Aplicando 1. a. i)
-SELECT
+SELECT DISTINCT
     pl1.id_lugarfallec
 FROM
     paises_lideres as pl1
@@ -50,7 +50,7 @@ WHERE
     );
 
 -- 1. b. ii) Aplicando 1. a. i)
-SELECT
+SELECT DISTINCT
     pl1.id_pers,
     pl1.tipo_lugarfallec
 FROM
@@ -68,24 +68,22 @@ WHERE
     );
 
 -- 1. b. iii) Aplicando 1. a. i)
-SELECT
-    DISTINCT id_pers
+SELECT DISTINCT 
+    pl1.id_pers
 FROM
-    paises_lideres as pl1
+    paises_lideres pl1
 WHERE
     EXISTS(
-        SELECT
-            n_pers,
-            fecha_nac,
-            id_lugarfallec
+        SELECT 
+            1
         FROM
-            paises_lideres as pl2
+            paises_lideres pl2
         WHERE
             pl1.id_pers = pl2.id_pers
             AND (
                 pl1.n_pers <> pl2.n_pers
                 OR pl1.fecha_nac <> pl2.fecha_nac
-                OR pl1.id_lugarfallec <> pl2.id_lugarfallec
+                OR pl1.fecha_fallec <> pl2.fecha_fallec
             )
     );	
 
@@ -113,18 +111,14 @@ HAVING
     COUNT(DISTINCT id_lugarfallec) > 1;
 
 -- 1. b. iii) Aplicando 1. a. ii)
-SELECT
-    id_pers
-FROM
-    paises_lideres
-GROUP BY
-    id_pers
-HAVING
-    (
-        COUNT(DISTINCT n_pers) > 1
-        OR COUNT(DISTINCT fecha_nac) > 1
-        OR COUNT(DISTINCT id_lugarfallec) > 1
-    );
+SELECT 
+    pl.id_pers
+FROM 
+    paises_lideres pl 
+GROUP BY 
+   pl.id_pers
+HAVING 
+    COUNT(DISTINCT pl.n_pers || ' ' || pl.fecha_nac || ' ' || pl.fecha_fallec) > 1;
     
 /*
 	1.c) La consulta (i) se mantuvo sin resultados
@@ -179,8 +173,7 @@ JOIN (
 		X
 	HAVING COUNT(DISTINCT Y) > 1
 ) as R3
-ON r1.X = r2.X
-;
+ON r1.X = r2.X;
 
 SELECT
 	pl.id_pers, pl.tipo_lugarfallec, pl.id_lugarfallec
@@ -196,5 +189,4 @@ JOIN (
 	HAVING COUNT(DISTINCT pl2.id_lugarfallec) > 1
 ) as sq
 ON pl.id_pers = sq.id_pers
-AND pl.tipo_lugarfallec = sq.tipo_lugarfallec
-;
+AND pl.tipo_lugarfallec = sq.tipo_lugarfallec;
