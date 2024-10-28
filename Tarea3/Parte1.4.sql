@@ -23,12 +23,17 @@ SELECT
     COALESCE(d_ciudad, 'Descripción ciudad no especificada') as d_ciudad,
     id_pers,    -- parte de PK
     COALESCE(n_pers, 'Nombre persona no especificado') as n_pers,
-    COALESCE(fecha_nac, '1900-01-01') as fecha_nac,
-    COALESCE(fecha_fallec, '2024-01-01') as fecha_fallec,
+    COALESCE(fecha_nac, 'Fecha de nacimineto no especificada') as fecha_nac,
+    COALESCE(fecha_fallec, 'Fecha de fallecimiento no especificada') as fecha_fallec,
     id_lugarfallec,  -- parte de PK
     COALESCE(tipo_lugarfallec, 'No especificado') as tipo_lugarfallec,
     COALESCE(n_lugarfallec, 'Nombre lugar fallecimiento no especificado') as n_lugarfallec
 FROM paises_lideres
+WHERE 
+	cargo IS NOT NULL AND
+	id_lider IS NOT NULL AND
+	id_pers IS NOT NULL AND
+	id_lugarfallec IS NOT NULL
 ON CONFLICT (cargo, id_lider, id_pers, id_lugarfallec) 
 DO NOTHING;
 
