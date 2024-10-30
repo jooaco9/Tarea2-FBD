@@ -190,3 +190,36 @@ JOIN (
 ) as sq
 ON pl.id_pers = sq.id_pers
 AND pl.tipo_lugarfallec = sq.tipo_lugarfallec;
+
+
+-- 1. d. ii) Con group by usando el IN
+SELECT
+    r1.X, r1.Y
+FROM
+    R AS r1
+WHERE
+    r1.X IN (
+        SELECT
+            r2.X
+        FROM
+            R AS r2
+        GROUP BY
+            r2.X
+        HAVING COUNT(DISTINCT r2.Y) > 1
+    );
+
+
+SELECT
+    pl.id_pers, pl.tipo_lugarfallec, pl.id_lugarfallec
+FROM
+    paises_lideres AS pl
+WHERE
+    (pl.id_pers, pl.tipo_lugarfallec) IN (
+        SELECT
+            pl2.id_pers, pl2.tipo_lugarfallec
+        FROM
+            paises_lideres AS pl2
+        GROUP BY
+            pl2.id_pers, pl2.tipo_lugarfallec
+        HAVING COUNT(DISTINCT pl2.id_lugarfallec) > 1
+    );
