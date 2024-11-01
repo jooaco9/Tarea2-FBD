@@ -1,7 +1,7 @@
 -- 1. a. i) X -> Y sin grroup by
 -- Si se cumple la dependencia devuelve vacio
 -- Si se cumple la dependencia entonces el exist no se cumple
-SELECT
+SELECT DISTINCT
     X
 FROM
     R as r1
